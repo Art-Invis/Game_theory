@@ -2,6 +2,10 @@
 def analyze_matrix(matrix, name="Matrix"):
     print(f"--- {name} ---")
     
+    print("Вхідна матриця:")
+    for row in matrix:
+        print("  " + "  ".join(f"{val:3}" for val in row))
+    
     row_mins = [min(row) for row in matrix]
     alpha_lower = max(row_mins)
     
@@ -25,7 +29,11 @@ def analyze_matrix(matrix, name="Matrix"):
                 saddle_points.append((i + 1, j + 1)) 
     if alpha_lower == alpha_upper:
         print(f"Сідлові точки (рядок, стовпець): {saddle_points}")
-        print(f"Чиста ціна гри: {alpha_lower}\n")
+        print(f"Чиста ціна гри: {alpha_lower}")
+        print("Оптимальні розв'язки гри:")
+        for pt in saddle_points:
+            print(f" -> Гравець 1 обирає стратегію {pt[0]}, Гравець 2 обирає стратегію {pt[1]}")
+        print("\n")
     else:
         print("Сідлових точок немає. Оптимальне рішення в чистих стратегіях відсутнє.\n")
 
@@ -60,7 +68,10 @@ import numpy as np
 def analyze_matrix_numpy(matrix, name="Matrix"):
     print(f"--- {name} (NumPy) ---")
     mat = np.array(matrix)
-    
+
+    print("Вхідна матриця:")
+    print(mat)
+
     row_mins = np.min(mat, axis=1)
     col_maxs = np.max(mat, axis=0)
     
@@ -84,7 +95,11 @@ def analyze_matrix_numpy(matrix, name="Matrix"):
                     saddle_points.append((r, c))
                     
         print(f"Сідлові точки (рядок, стовпець): {saddle_points}")
-        print(f"Чиста ціна гри: {alpha_lower}\n")
+        print(f"Чиста ціна гри: {alpha_lower}")
+        print("Оптимальні розв'язки гри:")
+        for pt in saddle_points:
+            print(f" -> Гравець 1 обирає стратегію {pt[0]}, Гравець 2 обирає стратегію {pt[1]}")
+        print("\n")
     else:
         print("Сідлових точок немає. Оптимальне рішення в чистих стратегіях відсутнє.\n")
 
